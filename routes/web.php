@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\aboutController;
+use App\Http\Controllers\postController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/about', [aboutController::class, 'about_view']);
+
+Route::get('test', [postController::class, 'testing']);
