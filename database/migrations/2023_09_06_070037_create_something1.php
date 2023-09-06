@@ -21,6 +21,8 @@ class CreateSomething1 extends Migration
         });
     }
 
+
+
     /**
      * Reverse the migrations.
      *
