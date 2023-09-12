@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\something1;
 use Illuminate\Http\Request;
 
 class postController extends Controller
@@ -13,7 +14,8 @@ class postController extends Controller
      */
     public function index()
     {
-        //
+        $data_something = something1::paginate(5);
+        return view('testing', compact('data_something'));
     }
 
     /**

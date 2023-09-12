@@ -17,6 +17,7 @@ class CreateSomething1 extends Migration
             $table -> increments("id_sesuatu");
             $table -> string("nama_sesuatu");
             $table -> integer("nilai_sesuatu");
+            $table -> date("tanggal_sesuatu");
             $table -> timestamps();
         });
     }

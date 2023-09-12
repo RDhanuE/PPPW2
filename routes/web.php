@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::get('/about', [aboutController::class, 'about_view']);
 
 Route::get('test', [postController::class, 'testing']);
+
+Route::get('something', [postController::class, 'index']);

@@ -6,6 +6,23 @@
     <title>testing</title>
 </head>
 <body>
-    <h1>TESTING</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>id</th>
+            <th>nama</th>
+            <th>nilai</th>
+            <th>tanggal</th>
+        </thead>
+        <tbody>
+            @foreach($data_something as $somethhing)
+            <tr>
+                <td>{{$somethhing -> id_sesuatu}}</td>
+                <td>{{$somethhing -> nama_sesuatu}}</td>
+                <td>{{$somethhing -> nilai_sesuatu}}</td>
+                <td>{{$somethhing -> tanggal_sesuatu -> format('d/m/Y')}}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </body>
 </html>
