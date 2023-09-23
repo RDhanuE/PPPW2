@@ -24,3 +24,13 @@ Route::get('/about', [aboutController::class, 'about_view']);
 Route::get('test', [postController::class, 'testing']);
 
 Route::get('something', [postController::class, 'index']);
+
+Route::get('something/create', [postController::class, 'create'])->name('something.create');
+
+Route::post('something', [postController::class, 'store']) -> name('something.store');
+
+Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name('something.destroy');
+
+Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit');
+
+Route::post('something/update/{id}', [postController::class, 'update']) -> name('something.update');

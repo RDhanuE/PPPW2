@@ -18,6 +18,7 @@ class CreateSomething1 extends Migration
             $table -> string("nama_sesuatu");
             $table -> integer("nilai_sesuatu");
             $table -> date("tanggal_sesuatu");
+            $table -> integer("harga_sesuatu");
             $table -> timestamps();
         });
     }

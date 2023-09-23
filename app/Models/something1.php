@@ -10,5 +10,6 @@ class something1 extends Model
     use HasFactory;
     protected $table = 'something1';
     protected $dates = ['tanggal_sesuatu'];
+    protected $primaryKey = 'id_sesuatu';
         
 }

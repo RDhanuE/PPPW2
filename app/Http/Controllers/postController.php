@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\something1;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class postController extends Controller
 {
@@ -14,8 +15,10 @@ class postController extends Controller
      */
     public function index()
     {
-        $data_something = something1::paginate(5);
-        return view('testing', compact('data_something'));
+        $data_something = something1::all();
+        $banyak_data = something1::count();
+        $jumlah_harga = something1::sum('nilai_sesuatu');
+        return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga'));
     }
 
     /**
@@ -25,7 +28,7 @@ class postController extends Controller
      */
     public function create()
     {
-        //
+        return view('something.create');
     }
 
     /**
@@ -36,7 +39,13 @@ class postController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $something = new something1();
+        $something -> nama_sesuatu = $request -> nama;
+        $something -> nilai_sesuatu = $request -> nilai;
+        $something -> tanggal_sesuatu = $request -> tanggal;
+        $something -> harga_sesuatu = $request -> harga;
+        $something -> save();
+        return redirect('/something');
     }
 
     /**
@@ -56,9 +65,9 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id_sesuatu)
     {
-        //
+        return view('something.update', compact('id_sesuatu'));
     }
 
     /**
@@ -68,9 +77,15 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id_sesuatu){
+        $something = something1::find($id_sesuatu);
+        $something -> nama_sesuatu = $request -> nama;
+        $something -> nilai_sesuatu = $request -> nilai;
+        $something -> tanggal_sesuatu = $request -> tanggal;
+        $something -> harga_sesuatu = $request -> harga;
+        $something -> save();
+        return redirect('/something');
+    
     }
 
     /**
@@ -79,9 +94,14 @@ class postController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_sesuatu)
     {
-        //
+        $something = something1::find($id_sesuatu);
+        $something->delete();
+        $maxId = DB::table('something1')->count('id_sesuatu');
+        DB::statement("ALTER TABLE something1 AUTO_INCREMENT = $maxId");
+
+        return redirect('/something');
     }
 
     public function testing()
