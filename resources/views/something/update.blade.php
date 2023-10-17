@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css')}}">
+    <script src="{{ asset('js/jquery.js')}}"></script>
+    <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
 </head>
 <body>
     
@@ -14,12 +18,19 @@
         @csrf
         <div>Nama = <input type="text" name="nama"></div>
         <div>Nilai = <input type="text" name="nilai"></div>
-        <div>Tanggal = <input type="text" name="tanggal"></div>
+        <div>Tanggal = <input type="text" name="tanggal" class="date"></div>
         <div>Harga = <input type="text" name="harga"></div>
         <div><button type="submit">Save</button>
         <a href="/something">Cancel</a>
         </div>
     </form>
 </div>
+<script type="text/javascript">
+    $('.date').datepicker({
+        format: 'yyyy/mm/dd',
+        autoclose: true
+    });
+</script>
+<script src="{{asset('js/bootstrap.min.js')}}"></script>
 </body>
 </html>

@@ -6,6 +6,9 @@
     <title>testing</title>
 </head>
 <body>
+    @if (Session::has('pesan'))
+        <div class="alert alert-success">{{Session::get('pesan')}}</div>
+    @endif
     <table class="table table-striped">
         <thead>
             <th>id</th>
@@ -37,7 +40,8 @@
             @endforeach
         </tbody>
     </table>
-    <p>Jumlah data = {{$banyak_data}}</p>
+    <div>{{$data_something->links()}}</div>
+    <p><strong>data = {{$banyak_data}}</strong></p>
     <p>Jumlah harga = {{"Rp".number_format($jumlah_harga, 2, ',' , '.')}}</p>
     <p align = "left"><a href="{{route('something.create')}}">PRESS FOR SOMETHING AMAZING</a></p>
 </body>

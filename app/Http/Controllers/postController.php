@@ -15,10 +15,12 @@ class postController extends Controller
      */
     public function index()
     {
-        $data_something = something1::all();
+        $page_limit = 5;
+        $data_something = something1::orderBy('id_sesuatu')->simplePaginate($page_limit);
         $banyak_data = something1::count();
         $jumlah_harga = something1::sum('nilai_sesuatu');
-        return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga'));
+        $no = $page_limit - ($data_something->currentPage() - 1);
+        return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
     /**
@@ -39,13 +41,20 @@ class postController extends Controller
      */
     public function store(Request $request)
     {
-        $something = new something1();
-        $something -> nama_sesuatu = $request -> nama;
-        $something -> nilai_sesuatu = $request -> nilai;
-        $something -> tanggal_sesuatu = $request -> tanggal;
-        $something -> harga_sesuatu = $request -> harga;
-        $something -> save();
-        return redirect('/something');
+        $this->validate($request, [
+            'nama_sesuatu' => 'required|string|max:40',
+            'nilai_sesuatu' => 'required|numeric',
+            'tanggal_sesuatu' => 'required|date',
+            'harga_sesuatu' => 'required|numeric'
+        ]);
+
+        // $something = new something1();
+        // $something -> nama_sesuatu = $request -> nama;
+        // $something -> nilai_sesuatu = $request -> nilai;
+        // $something -> tanggal_sesuatu = $request -> tanggal;
+        // $something -> harga_sesuatu = $request -> harga;
+        // $something -> save();
+        return redirect('/something')->with('pesan', 'Data berhasil ditambahkan');
     }
 
     /**
@@ -84,7 +93,7 @@ class postController extends Controller
         $something -> tanggal_sesuatu = $request -> tanggal;
         $something -> harga_sesuatu = $request -> harga;
         $something -> save();
-        return redirect('/something');
+        return redirect('/something')->with('pesan', 'Data berhasil diubah');
     
     }
 
@@ -101,7 +110,7 @@ class postController extends Controller
         $maxId = DB::table('something1')->count('id_sesuatu');
         DB::statement("ALTER TABLE something1 AUTO_INCREMENT = $maxId");
 
-        return redirect('/something');
+        return redirect('/something')->with('pesan', 'Data berhasil dihapus');
     }
 
     public function testing()
