@@ -23,6 +23,17 @@ class postController extends Controller
         return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
+    public function search(Request $request)
+    {
+        $page_limit = 5;
+        $search = $request -> name;
+        $data_something = something1::where('nama_sesuatu', 'like', "%".$search."%") -> simplePaginate($page_limit);
+        $banyak_data = $data_something->count();
+        $jumlah_harga = $data_something->sum('harga_sesuatu');
+        $no = $page_limit - ($data_something->currentPage() - 1);
+        return view('something.search', compact('data_something', 'banyak_data', 'jumlah_harga', 'no', 'search'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,10 +53,10 @@ class postController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nama_sesuatu' => 'required|string|max:40',
-            'nilai_sesuatu' => 'required|numeric',
-            'tanggal_sesuatu' => 'required|date',
-            'harga_sesuatu' => 'required|numeric'
+            'nama' => 'required|string|max:40',
+            'nilai' => 'required|numeric',
+            'tanggal' => 'required|date',
+            'harga' => 'required|numeric'
         ]);
 
         // $something = new something1();

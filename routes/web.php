@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',  [postController::class, 'index']);
 
 Route::get('/about', [aboutController::class, 'about_view']);
 
@@ -34,3 +32,5 @@ Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name
 Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit');
 
 Route::post('something/update/{id}', [postController::class, 'update']) -> name('something.update');
+
+Route::get('/something/search', [postController::class, 'search']) -> name('something.search');

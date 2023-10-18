@@ -11,6 +11,7 @@
         @csrf
         <input type="text" name="name" id="name" class="form-control" placeholder="Cari berdasarkan nama" style="width: 30%;display:inline;margin-top:10px;margin-bottom:10px;float: left;">
     </form>
+    <a href="/something" class="btn btn-warning" style="float: right; width:10%">BACK</a>
     @if (Session::has('pesan'))
         <div class="alert alert-success">{{Session::get('pesan')}}</div>
     @endif
@@ -45,7 +46,14 @@
             @endforeach
         </tbody>
     </table>
+
     <div>{{$data_something->links()}}</div>
+    @if (count($data_something))
+        <div class="alert alert-success"> Ditemukan <strong>{{count($data_something)}}</strong>data dengan nama: <strong>{{ $search }}</strong></div>
+    @else
+        <div class="alert alert-warning"><h4>Nama {{$search}} tidak ditemukan</h4></div>
+        <a href="/something" class="btn btn-warning">BACK</a>
+    @endif
     <p><strong>data = {{$banyak_data}}</strong></p>
     <p>Jumlah harga = {{"Rp".number_format($jumlah_harga, 2, ',' , '.')}}</p>
     <p align = "left"><a href="{{route('something.create')}}">PRESS FOR SOMETHING AMAZING</a></p>

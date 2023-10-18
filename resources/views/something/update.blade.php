@@ -16,10 +16,10 @@
     <h4>Update on data number {{$id_sesuatu}}</h4>
     <form method="post" action="{{route('something.update', $id_sesuatu)}}">
         @csrf
-        <div>Nama = <input type="text" name="nama"></div>
-        <div>Nilai = <input type="text" name="nilai"></div>
-        <div>Tanggal = <input type="text" name="tanggal" class="date"></div>
-        <div>Harga = <input type="text" name="harga"></div>
+        <div>Nama = <input type="text" name="nama" id="nama"></div>
+        <div>Nilai = <input type="text" name="nilai" id="nilai"></div>
+        <div>Tanggal = <input name="tanggal" class="date" autocomplete="off" id="tanggal"></div>
+        <div>Harga = <input type="text" name="harga" id="harga"></div>
         <div><button type="submit">Save</button>
         <a href="/something">Cancel</a>
         </div>

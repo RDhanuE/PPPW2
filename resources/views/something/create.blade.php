@@ -22,10 +22,10 @@
     <h4>Add something</h4>
     <form method="post" action="{{route('something.store')}}">
         @csrf
-        <div>Nama = <input type="text" name="nama" id="nama_sesuatu"></div>
-        <div>Nilai = <input type="text" name="nilai" id="nilai_sesuatu"></div>
-        <div>Tanggal = <input name="tanggal" class="date" autocomplete="off" id="tanggal_sesuatu"></div>
-        <div>Harga = <input type="text" name="harga" id="harga_sesuatu"></div>
+        <div>Nama = <input type="text" name="nama" id="nama"></div>
+        <div>Nilai = <input type="text" name="nilai" id="nilai"></div>
+        <div>Tanggal = <input name="tanggal" class="date" autocomplete="off" id="tanggal"></div>
+        <div>Harga = <input type="text" name="harga" id="harga"></div>
         <div><button type="submit">Save</button>
         <a href="/testing">Cancel</a>
         </div>
