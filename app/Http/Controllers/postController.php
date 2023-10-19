@@ -59,12 +59,12 @@ class postController extends Controller
             'harga' => 'required|numeric'
         ]);
 
-        // $something = new something1();
-        // $something -> nama_sesuatu = $request -> nama;
-        // $something -> nilai_sesuatu = $request -> nilai;
-        // $something -> tanggal_sesuatu = $request -> tanggal;
-        // $something -> harga_sesuatu = $request -> harga;
-        // $something -> save();
+        $something = new something1();
+        $something -> nama_sesuatu = $request -> nama;
+        $something -> nilai_sesuatu = $request -> nilai;
+        $something -> tanggal_sesuatu = $request -> tanggal;
+        $something -> harga_sesuatu = $request -> harga;
+        $something -> save();
         return redirect('/something')->with('pesan', 'Data berhasil ditambahkan');
     }
 

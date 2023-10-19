@@ -27,7 +27,7 @@
         <div>Tanggal = <input name="tanggal" class="date" autocomplete="off" id="tanggal"></div>
         <div>Harga = <input type="text" name="harga" id="harga"></div>
         <div><button type="submit">Save</button>
-        <a href="/testing">Cancel</a>
+        <a href="/something">Cancel</a>
         </div>
     </form>
 </div>
