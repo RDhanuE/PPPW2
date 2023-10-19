@@ -62,3 +62,16 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Developer's Note
+
+Kesulitan dalam menggunakan Laravel : 
+- Eloquent class yang terkadang spesifik membuat kesalahan sering terjadi
+- Kesulitan dalam _debugging_ dan menemukan _error_ yang dimaksud oleh Laravel
+- Kurangnya _tools intelliphase_ atau _autocomplete snippet_ untuk kode - kode laravel dan _eloquuent class_ nya
+
+Fitur sejauh ini :
+- DB (Migration, Model, Seeder, Factory)
+- View (_belum menerapkan include, extend, yield, dan section, namun sudah memahami materi tersebut_)
+- Route (_get_ dan _post_)
+- Controller (CRUD, Search)
