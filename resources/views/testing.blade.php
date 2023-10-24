@@ -30,8 +30,7 @@
                 <td>{{$somethhing -> nama_sesuatu}}</td>
                 <td>{{$somethhing -> nilai_sesuatu}}</td>
                 <td>{{"Rp".number_format($somethhing -> harga_sesuatu, 2, ',' , '.')}}</td>
-                <td>{{$somethhing -> tanggal_sesuatu -> format('d/m/Y')}}</td>
-                <td>
+                <td>{{ Carbon\Carbon::parse($somethhing->tanggal_sesuatu)->format('d/m/Y') }}</td><td>
                     <form action="{{route('something.destroy', $somethhing->id_sesuatu)}}" method="POST">
                         @csrf
                         <button onclick="return confirm('Hapus data ?')">Hapus</button>
