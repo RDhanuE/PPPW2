@@ -29,21 +29,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-
 Route::get('/about', [aboutController::class, 'about_view']);
 
 Route::get('test', [postController::class, 'testing']);
 
-Route::get('something', [postController::class, 'index']);
+Route::get('/something', [postController::class, 'index']) -> middleware('auth');
 
-Route::get('something/create', [postController::class, 'create'])->name('something.create');
+Route::get('something/create', [postController::class, 'create'])->name('something.create') -> middleware('auth') ;
 
 Route::post('something', [postController::class, 'store']) -> name('something.store');
 
-Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name('something.destroy');
+Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name('something.destroy') -> middleware('auth');
 
-Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit');
+Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit') -> middleware('auth');
 
 Route::post('something/update/{id}', [postController::class, 'update']) -> name('something.update');
 
@@ -51,3 +49,8 @@ Route::get('/something/search', [postController::class, 'search']) -> name('some
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/view', function () {
+    return view('view');
+});
+
+require __DIR__.'/auth.php';

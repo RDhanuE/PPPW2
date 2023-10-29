@@ -87,7 +87,8 @@ class postController extends Controller
      */
     public function edit($id_sesuatu)
     {
-        return view('something.update', compact('id_sesuatu'));
+        $dataOld = something1::find($id_sesuatu);
+        return view('something.update', compact('id_sesuatu', 'dataOld'));
     }
 
     /**
