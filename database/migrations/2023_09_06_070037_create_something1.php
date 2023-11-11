@@ -14,7 +14,7 @@ class CreateSomething1 extends Migration
     public function up()
     {
         Schema::create('something1', function (Blueprint $table) {
-            $table -> increments("id_sesuatu");
+            $table -> id("id_sesuatu");
             $table -> string("nama_sesuatu");
             $table -> integer("nilai_sesuatu");
             $table -> date("tanggal_sesuatu");

@@ -39,9 +39,9 @@ Route::get('something/create', [postController::class, 'create'])->name('somethi
 
 Route::post('something', [postController::class, 'store']) -> name('something.store');
 
-Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name('something.destroy') -> middleware('auth');
+Route::post('something/delete/{id}', [postController::class, 'destroy']) -> name('something.destroy') -> middleware('admin');
 
-Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit') -> middleware('auth');
+Route::get('something/update/{id}', [postController::class, 'edit'])->name('something.edit') -> middleware('admin');
 
 Route::post('something/update/{id}', [postController::class, 'update']) -> name('something.update');
 
@@ -52,5 +52,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/view', function () {
     return view('view');
 });
+
+// Route::resource('something', postController::class) -> middleware('auth');
 
 require __DIR__.'/auth.php';

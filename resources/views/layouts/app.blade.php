@@ -17,9 +17,9 @@
 
         <!-- Scripts -->
         
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script src="{{ asset('js/jquery.js')}}"></script>
         <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     </head>
     <body class="font-sans antialiased">

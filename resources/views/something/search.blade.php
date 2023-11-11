@@ -26,6 +26,7 @@
             <th>harga</th>
             <th>tanggal</th>
             <th>action</th>
+            <th>gambar</th>
         </thead>
         <tbody style="text-align: center">
             @foreach($data_something as $somethhing)
@@ -43,6 +44,13 @@
                         @csrf
                         <button class="btn btn-secondary rounded m-1" style="width: 100px">Update</button>
                     </form>
+                </td>
+                <td>
+                    @if ($somethhing -> filepath)
+                        <div class="relative h-10 w-10">
+                            <img class="h-full w-full object-cover object-center" src="{{ asset($somethhing -> filepath) }}" alt=""/>
+                        </div>
+                    @endif
                 </td>
             </tr>
             @endforeach
