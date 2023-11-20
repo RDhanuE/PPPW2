@@ -53,6 +53,8 @@ Route::get('/view', function () {
     return view('view');
 });
 
+Route::get('/detail_something/{search}', [postController::class,'something1kitten']) -> name('something.SEO');
+
 // Route::resource('something', postController::class) -> middleware('auth');
 
 require __DIR__.'/auth.php';

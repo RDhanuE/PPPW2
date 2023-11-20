@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
+use PDO;
 
 class postController extends Controller
 {
@@ -195,5 +196,11 @@ class postController extends Controller
     public function testing()
     {
         return view('testing');
+    }
+
+    public function something1kitten($search){
+        $something = something1::where('kittens_seo', $search)-> first();
+        $kittens = $something->photos()->orderBy('id', 'desc')->paginate(6);
+        return view('kitten-something1', compact('something','kittens'));
     }
 }

@@ -24,4 +24,8 @@ class something1 extends Model
     public function kittens(): HasMany{
         return $this->hasMany(kittens::class, 'something1_id', 'id_sesuatu');
     }
+
+    public function photos(){
+        return $this->hasMany('App\Something1', 'something1_id', 'id_sesuatu');
+    }
 }
