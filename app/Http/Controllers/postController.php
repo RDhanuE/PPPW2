@@ -27,6 +27,7 @@ class postController extends Controller
         return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
+    // show index for user
     public function indexUser()
     {
         $page_limit = 5;
@@ -37,6 +38,7 @@ class postController extends Controller
         return view('testinguser', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
+    // show detail of something for user
     public function detailSomething($id){
         $data = something1::find($id);
         return view('detailUser', compact('id', 'data'));
