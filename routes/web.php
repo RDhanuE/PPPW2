@@ -33,9 +33,14 @@ Route::get('/about', [aboutController::class, 'about_view']);
 
 Route::get('test', [postController::class, 'testing']);
 
-Route::get('/something', [postController::class, 'index']) -> middleware('auth');
+Route::get('/something', [postController::class, 'index']) -> middleware('admin');
 
-Route::get('something/create', [postController::class, 'create'])->name('something.create') -> middleware('auth') ;
+Route::get('/somethingUser', [postController::class, 'indexUser']) ;
+
+Route::get('/somethingUser/{id}', [postController::class, 'detailSomething'])-> name('user.index');
+
+
+Route::get('something/create', [postController::class, 'create'])->name('something.create') -> middleware('admin') ;
 
 Route::post('something', [postController::class, 'store']) -> name('something.store');
 

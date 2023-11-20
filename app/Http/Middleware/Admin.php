@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\postController;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response{
         if(!Auth::user()->level == 'admin'){
-            
-            return redirect()->back();
+            return redirect()->action([postController::class, 'indexUser']);
         }
         return $next($request);
     }

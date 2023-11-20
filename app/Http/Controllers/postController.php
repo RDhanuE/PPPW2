@@ -27,6 +27,22 @@ class postController extends Controller
         return view('testing', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
+    public function indexUser()
+    {
+        $page_limit = 5;
+        $data_something = something1::orderBy('id_sesuatu')->simplePaginate($page_limit);
+        $banyak_data = something1::count();
+        $jumlah_harga = something1::sum('nilai_sesuatu');
+        $no = $page_limit - ($data_something->currentPage() - 1);
+        return view('testinguser', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
+    }
+
+    public function detailSomething($id){
+        $data = something1::find($id);
+        return view('detailUser', compact('id', 'data'));
+    
+    }
+
     public function search(Request $request)
     {
         $page_limit = 5;
@@ -198,9 +214,4 @@ class postController extends Controller
         return view('testing');
     }
 
-    public function something1kitten($search){
-        $something = something1::where('kittens_seo', $search)-> first();
-        $kittens = $something->photos()->orderBy('id', 'desc')->paginate(6);
-        return view('kitten-something1', compact('something','kittens'));
-    }
 }

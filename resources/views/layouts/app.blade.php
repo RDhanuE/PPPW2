@@ -12,7 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css')}}">
-    
+        <link href="{{ asset('dist/css/lightbox.min.css') }}" rel="stylesheet">
 
 
         <!-- Scripts -->
@@ -40,5 +40,6 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="{{ asset('dist/js/lightbox-plus-jquery.min.js') }}"></script>
     </body>
 </html>
