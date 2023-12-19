@@ -20,7 +20,40 @@
         <script src="{{ asset('js/jquery.js')}}"></script>
         <script src="{{ asset('js/bootstrap-datepicker.js')}}"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    <style>
+        .rating {
+      unicode-bidi: bidi-override;
+      direction: rtl;
+      text-align: center;
+    }
+
+    .rating > input {
+      display: none;
+    }
+
+    .rating > label {
+      display: inline-block;
+      position: relative;
+      width: 1.1em;
+      font-size: 2em;
+      color: #aaa8a8;
+      cursor: pointer;
+    }
+
+    .rating > label::before {
+      content: '\2605';
+      position: absolute;
+      opacity: 0.5;
+      transition: opacity 0.25s;
+    }
+
+    .rating > label:hover:before,
+    .rating > label:hover ~ label:before,
+    .rating > input:checked ~ label:before {
+      opacity: 1;
+      color: #ffcc00;
+    }
+    </style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">

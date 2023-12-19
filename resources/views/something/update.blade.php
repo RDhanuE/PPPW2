@@ -18,6 +18,10 @@
                 <x-input-label for="harga" :value="__('Harga')" />
                 <x-text-input id="harga" class="block mt-1 w-full" type="text" name="harga"/>
             </div>
+            <div style="width: 30%">
+                <x-input-label for="kategori" :value="__('kategori')" />
+                <x-text-input id="kategori" class="block mt-1 w-full" type="text" name="kategori"/>
+            </div>
             <div>
                 <x-input-label for="tanggal" :value="__('Tanggal')" />
                 <input name="tanggal" class="date" autocomplete="off" id="tanggal">
@@ -42,6 +46,7 @@
                     </div>
                 @endforeach
             </div>
+            
         </form>
     </div>
     <script type="text/javascript">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\kittens;
 use App\Models\something1;
 use Illuminate\Http\Request;
@@ -35,6 +36,19 @@ class postController extends Controller
         $banyak_data = something1::count();
         $jumlah_harga = something1::sum('nilai_sesuatu');
         $no = $page_limit - ($data_something->currentPage() - 1);
+
+        foreach ($data_something as $something) {
+            $ratings = $something->ratings()->pluck('rating'); // Assuming you have a 'rating' column in your ratings table
+            $totalRatings = $ratings->count();
+            
+            if ($totalRatings > 0) {
+                $something->average_rating = $something->ratings()->avg('rating');
+            } else {
+                $something->Average_rating = 0; // Set default value if there are no ratings
+            }
+            $something->save();
+        }
+
         return view('testinguser', compact('data_something', 'banyak_data', 'jumlah_harga', 'no'));
     }
 
@@ -78,8 +92,16 @@ class postController extends Controller
             'nama' => 'required|string|max:40',
             'nilai' => 'required|numeric',
             'tanggal' => 'required|date',
-            'harga' => 'required|numeric'
+            'harga' => 'required|numeric',
+            'kategori' => 'string'
         ]);
+
+        $category = category::where('category', $request->kategori)->first();
+
+        if (!$category) {
+            $category = Category::create(['category' => $request->kategori]);
+        }
+        
 
         
         $filename = time().'_'.$request->gambar->getClientOriginalName();
@@ -96,6 +118,7 @@ class postController extends Controller
         $something -> harga_sesuatu = $request -> harga;
         $something -> filename = $filename;
         $something -> filepath = '/storage/'.$filepath;
+        $something -> category = $category->id;
         $something -> save();
 
         if($request->hasFile('AG')) {
@@ -156,7 +179,14 @@ class postController extends Controller
             'harga' => 'required|numeric',
             'gambar' => 'image|mimes:jpeg,jpg,png|max:2048',
             'additional_gambar' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'kategori' => 'string'
         ]);
+
+        $category = category::where('category', $request->kategori)->first();
+
+        if (!$category) {
+            $category = Category::create(['category' => $request->kategori]);
+        }
         
         if($request->hasFile('AG')) {
             foreach ($request->file('AG') as $file) {
@@ -173,12 +203,19 @@ class postController extends Controller
             }
         }
 
-        $filename = time().'_'.$request->gambar->getClientOriginalName();
-        $filepath = $request -> file('gambar')->storeAs('uploads', $filename, 'public');
-
-        Image::make(storage_path().'/app/public/uploads/'.$filename)
-        ->fit(90, 120)
-        ->save();
+        if ($request->hasFile('gambar')) {
+            $filename = time() . '_' . $request->gambar->getClientOriginalName();
+            $filepath = $request->file('gambar')->storeAs('uploads', $filename, 'public');
+    
+            Image::make(storage_path() . '/app/public/uploads/' . $filename)
+                ->fit(90, 120)
+                ->save();
+    
+            $something->update([
+                'filename' => $filename,
+                'filepath' => '/storage/' . $filepath,
+            ]);
+        }
 
 
         $something -> update([
@@ -186,8 +223,7 @@ class postController extends Controller
             'nilai_sesuatu'=> $request -> nilai,
             'tanggal_sesuatu'=> $request -> tanggal,
             'harga_sesuatu'=> $request -> harga,
-            'filename' => $filename,
-            'filepath'=> '/storage/'.$filepath
+            'category' => $category->id
         ]);
 
         return redirect('/something')->with('pesan', 'Data berhasil diubah');

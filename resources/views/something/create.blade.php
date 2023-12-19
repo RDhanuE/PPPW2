@@ -28,6 +28,11 @@
                 <x-input-label for="tanggal" :value="__('Tanggal')" />
                 <input name="tanggal" class="date" autocomplete="off" id="tanggal">
             </div>
+            <div style="width: 30%">
+                <x-input-label for="kategori" :value="__('kategori')" />
+                <x-text-input id="kategori" class="block mt-1 w-full" type="text" name="kategori"/>
+            </div>
+            
             {{-- <div>Nama = <input type="text" name="nama" id="nama"></div>
             <div>Nilai = <input type="text" name="nilai" id="nilai"></div>
             <div>Harga = <input type="text" name="harga" id="harga"></div> --}}

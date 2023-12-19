@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\postController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,12 +37,15 @@ Route::get('/about', [aboutController::class, 'about_view']);
 
 Route::get('test', [postController::class, 'testing']);
 
-Route::get('/something', [postController::class, 'index']) -> middleware('admin');
+Route::get('/something', [postController::class, 'index']) -> middleware('admin') ->name('content');
 
-Route::get('/somethingUser', [postController::class, 'indexUser']) ;
+Route::get('/somethingUser', [postController::class, 'indexUser'])-> middleware('auth') ;
 
-Route::get('/somethingUser/{id}', [postController::class, 'detailSomething'])-> name('user.index');
+Route::get('/somethingUser/{id}', [postController::class, 'detailSomething'])-> middleware('auth')-> name('user.index');
 
+Route::post('somethingUser/{id}', [RatingController::class, 'storeRating'])-> middleware('auth') -> name('user.rate');
+
+Route::post('somethingUser/{id}/favourite', [FavouriteController::class, 'addFav']) -> middleware('auth')-> name('user.fav');
 
 Route::get('something/create', [postController::class, 'create'])->name('something.create') -> middleware('admin') ;
 
@@ -52,6 +59,8 @@ Route::post('something/update/{id}', [postController::class, 'update']) -> name(
 
 Route::get('/something/search', [postController::class, 'search']) -> name('something.search');
 
+Route::get('/favourite', [FavouriteController::class, 'showFav']) -> name('favourite')-> middleware('auth');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/view', function () {
@@ -59,6 +68,12 @@ Route::get('/view', function () {
 });
 
 Route::get('/detail_something/{search}', [postController::class,'something1kitten']) -> name('something.SEO');
+
+Route::get('/popular', [RatingController::class, 'mostPopular'])->name('popular')-> middleware('auth');
+
+Route::get('/category', [CategoryController::class, 'index'])->name('category')->middleware('auth');
+
+Route::post('/user/add-review/{id_sesuatu}', [ReviewController::class, 'addReview'])->name('user.addReview');
 
 // Route::resource('something', postController::class) -> middleware('auth');
 

@@ -29,8 +29,8 @@
             <th>Rating</th>
         </thead>
         <tbody style="text-align: center">
-            @foreach($data_something as $somethhing)
-            <tr class="align-middle" onclick="window.location='{{route('user.index', $somethhing -> id_sesuatu)}}';" style="cursor: pointer;">
+            @foreach($data as $somethhing)
+            <tr class="align-middle">
                 <td>{{$somethhing -> id_sesuatu}}</td>
                 <td>{{$somethhing -> nama_sesuatu}}</td>
                 <td>{{$somethhing -> nilai_sesuatu}}</td>
@@ -49,6 +49,6 @@
         </tbody>
     </table>
     <div>
-        {{$data_something->links()}}
+        {{$data->links()}}
     </div>
 </x-app-layout>

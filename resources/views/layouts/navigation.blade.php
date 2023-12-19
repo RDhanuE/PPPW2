@@ -16,6 +16,33 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('content')" :active="request()->routeIs('content')">
+                        {{ __('Content') }}
+                    </x-nav-link>
+                </div>
+                   
+
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('favourite')" :active="request()->routeIs('favourite')">
+                        {{ __('Favourite') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('popular')" :active="request()->routeIs('popular')">
+                        {{ __('Popular Something') }}
+                    </x-nav-link>
+                </div>
+            
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('category')" :active="request()->routeIs('category')">
+                        {{ __('categories') }}
+                    </x-nav-link>
+                </div>
+            
             </div>
 
             <!-- Settings Dropdown -->
